@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 public class CollectionExample {
     public static void main(String[] args) throws Exception {
@@ -32,5 +35,19 @@ public class CollectionExample {
         while (strItr.hasNext()) {
             System.out.print(", " + strItr.next());
         }
+        System.out.println("\n");
+
+        // using Map.Entry to get all the values in a map
+        Map<String, String> phonebook = new HashMap<>();
+        phonebook.put("Alex", "9876543210");
+        phonebook.put("Bob", "9999999999");
+        phonebook.put("Catrina", "9878767650");
+
+        // Entry is a nested interface inside the Map interface
+        Set<Map.Entry<String, String>> values = phonebook.entrySet();
+        for (Map.Entry<String, String> entry : values) {
+            System.out.println(entry.getKey() + " : " + entry.getValue());
+        }
+
     }
 }
