@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -90,6 +91,15 @@ public class ListTest {
         System.out.println();
         Collections.sort(concurrentContactList); // this does not seem to work
         concurrentContactList.parallelStream().forEach(System.out::println);
+
+        // testing the Comparators
+        Collections.sort(contactList, new PhoneComparator());
+        System.out.println("\nSorting using Phone Comparator");
+        contactList.forEach(System.out::println);
+
+        Collections.sort(contactList, new NameComparator());
+        System.out.println("\nSorting using Name Comparator");
+        contactList.forEach(System.out::println);
     }
 }
 
@@ -169,4 +179,23 @@ class Contact implements Comparable<Contact> {
     public int compareTo(Contact o) {
         return this.getName().compareTo(o.getName());
     }
+}
+
+// implementing some comparator classes for the Contacts
+class NameComparator implements Comparator<Contact> {
+
+    @Override
+    public int compare(Contact o1, Contact o2) {
+        return o1.getName().compareTo(o2.getName());
+    }
+
+}
+
+class PhoneComparator implements Comparator<Contact> {
+
+    @Override
+    public int compare(Contact o1, Contact o2) {
+        return o1.getPhone().compareTo(o2.getPhone());
+    }
+
 }
