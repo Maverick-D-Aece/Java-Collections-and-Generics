@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -195,7 +196,7 @@ class PhoneComparator implements Comparator<Contact> {
 
     @Override
     public int compare(Contact o1, Contact o2) {
-        return o1.getPhone().compareTo(o2.getPhone());
+        return new BigInteger(o1.getPhone()).compareTo(new BigInteger(o2.getPhone()));
     }
 
 }
