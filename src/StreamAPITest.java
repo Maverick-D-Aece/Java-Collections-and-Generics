@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -63,6 +64,40 @@ public class StreamAPITest {
 		studentList.parallelStream().filter(s -> s.getScore() >= 85).forEach(System.out::println);
 
 		// a stream does not change the original collection of which it is a stream
+
+		// testing the reduce method
+		List<String> names = Arrays.asList("Alex", "Bob", "Carter", "Diane", "Elly", "Fymryn");
+		Optional<String> reduCedNames = names.stream().reduce((name1, name2) -> name1 + ", " + name2);
+		if (reduCedNames.isPresent()) {
+			String redNames = reduCedNames.get();
+			System.out.println(redNames);
+		}
+
+		// testing the collect method
+		String fNames = names.stream().collect(Collectors.joining(", "));
+		System.out.println(fNames);
+
+		// testing reduce method on integers
+		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+		Optional<Integer> reducedNum = numbers.stream().reduce((num1, num2) -> num1 + num2);
+		if (reducedNum.isPresent()) {
+			int sum = reducedNum.get();
+			System.out.println("Total = " + sum);
+		}
+
+		// testing the min method
+		Optional<Integer> minNum = numbers.stream().min((num1, num2) -> num1 - num2);
+		if (minNum.isPresent()) {
+			int min = minNum.get();
+			System.out.println("Smallest number = " + min);
+		}
+
+		// testing the max method
+		Optional<Integer> maxNum = numbers.stream().max((num1, num2) -> num1 - num2);
+		if (maxNum.isPresent()) {
+			int max = maxNum.get();
+			System.out.println("Biggest number = " + max);
+		}
 
 	}
 }
